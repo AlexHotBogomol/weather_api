@@ -12,13 +12,16 @@ Weather Api Project
   <li>Для удаление ненужной в данном проекте frontend части использовал команду<br>
   <code>php artisan preset none</code></li>
   <li>Создал базу данных <b>weather_api</b>, прописал подключение к бд в файле .env<br>
-    <code><pre>
-      DB_CONNECTION=mysql
-      DB_HOST=127.0.0.1
-      DB_PORT=3306
-      DB_DATABASE=weather_db
-      DB_USERNAME=root
-      DB_PASSWORD=
-    </pre></code>
+    <pre>
+      <code>
+        DB_CONNECTION=mysql
+        DB_HOST=127.0.0.1
+        DB_PORT=3306
+        DB_DATABASE=weather_db
+        DB_USERNAME=root
+        DB_PASSWORD=
+      </code>
+    </pre>
   </li>
 </ol>
+
