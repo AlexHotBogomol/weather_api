@@ -1,7 +1,7 @@
 Weather Api Project
 
 <ol>
-  <li>1. Для установки laravel проекта использовал консольную команду (при установленном composer)<br>
+  <li>Для установки laravel проекта использовал консольную команду (при установленном composer)<br>
   <code>composer create-project laravel/laravel weather_api --prefer-dist</code></li>
     <ul>Для развертывание этого проекта на другой машине следует склонировать файлы с этого репозитория: 
       <li>прописать в консоли команду<br><code>composer install</code>;</li>
