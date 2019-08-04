@@ -23,5 +23,23 @@ Weather Api Project
       </code>
     </pre>
   </li>
+  <li>Создал модель Weather и миграцию для нее командой<br>
+  <code>php artisan make:model Weather -m</code></li>
+  <li>Заполнил поля в миграции таким образом:<br>
+    <pre>
+      <code>
+        Schema::create('weathers', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('city');
+            $table->integer('temperature');
+            $table->integer('humidity');
+            $table->integer('wind_speed');
+            $table->timestamps();
+        });
+      </code>
+    </pre>
+    и мигрировал командой<br>
+    <code>php artisan migrate</code>
+  </li>
 </ol>
 
