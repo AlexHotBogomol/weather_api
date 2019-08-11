@@ -41,5 +41,59 @@ Weather Api Project
     и мигрировал командой<br>
     <code>php artisan migrate</code>
   </li>
+  <li>
+    Добавил атрибут fillable для модели Weather
+    <pre><code>
+        class Weather extends Model
+        {
+            protected $fillable = ['city', 'temperature', 'humidity', 'wind_speed'];
+        }
+    </code></pre>
+  </li>
+  <li>
+    Добавил два роута в api.php для получения всех данных о погоде
+    <pre>
+        <code>
+        Route::get('weather', function() {
+            return Weather::all();
+        });
+        </code>
+    </pre>
+    и для получения погоды по конкретному городу
+    <pre><code>
+        Route::get('weather/{city}', function($city) {
+            return Weather::where('city', $city) -> first();
+        });
+    </code></pre>
+  </li>
+  <li>
+    Создал контроллер командой 
+    <pre><code>
+        php artisan make:controller WeatherController
+    </code></pre>
+  </li>
+  <li>
+    В контроллере прописал два метода index и show для получения всей погоды и по городу соответственно
+    <pre><code>
+        class WeatherController extends Controller
+        {
+            public function index()
+            {
+                return Weather::all();
+            }
+            public function show($city)
+            {
+                return Weather::where('city', $city) -> first();
+            }
+        }
+    </code></pre>
+  </li>
+  <li>
+    После этого убрал логику из роута в файле api.php
+    <pre><code>
+        Route::get('weather', 'WeatherController@index');
+        Route::get('weather/{city}', 'WeatherController@show');
+    </code></pre>
+  </li>
 </ol>
 

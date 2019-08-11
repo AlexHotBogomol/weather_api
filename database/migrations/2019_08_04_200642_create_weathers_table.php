@@ -19,6 +19,7 @@ class CreateWeathersTable extends Migration
             $table->integer('temperature');
             $table->integer('humidity');
             $table->integer('wind_speed');
+            $table->integer('pressure');
             $table->timestamps();
         });
     }
