@@ -10,7 +10,21 @@ class WeatherController extends Controller
 
     public function index(Request $request)
     {
-        return Weather::all();
+        $weathers = Weather::all();
+        return $weathers->map(function($item)use($request) {
+            return $this->formatData($item, $request);
+        });
+    }
+
+    public function show(Request $request, $city)
+    {
+          $weather = Weather::where('city',$city) -> first();
+          return $this->formatData($weather, $request);
+    }
+
+    public function store(Request $request){
+          $weather = Weather::create($request->all());
+          return response()->json($weather, 201);
     }
 
     private function celsiusToFahrenheit($value){
@@ -23,20 +37,16 @@ class WeatherController extends Controller
         return $value * 1.33322;
     }
 
-    public function show(Request $request, $city)
-    {
-          $weather = Weather::where('city',$city) -> first();
-
-          if(mb_strtolower($request->tempSystem) == 'f'){
-              $weather->temperature = $this->celsiusToFahrenheit($weather->temperature);
-          }
-          if(mb_strtolower($request->speedSystem) == 'km'){
-              $weather->wind_speed = $this->meterPerSecondToKilometerPerHour($weather->wind_speed);
-          }
-          if(mb_strtolower($request->pressureSystem) == 'hpa'){
-              $weather->pressure = $this->millimetersOfMercuryToHectopascals($weather->pressure);
-          }
-
-          return $weather;
+    private function formatData($object, Request $request){
+        if(mb_strtolower($request->tempSystem) == 'f'){
+            $object->temperature = $this->celsiusToFahrenheit($object->temperature);
+        }
+        if(mb_strtolower($request->speedSystem) == 'km'){
+            $object->wind_speed = $this->meterPerSecondToKilometerPerHour($object->wind_speed);
+        }
+        if(mb_strtolower($request->pressureSystem) == 'hpa'){
+            $object->pressure = $this->millimetersOfMercuryToHectopascals($object->pressure);
+        }
+        return $object;
     }
 }

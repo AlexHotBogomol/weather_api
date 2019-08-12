@@ -21,3 +21,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('weather/', 'WeatherController@index');
 
 Route::get('weather/{city}', 'WeatherController@show');
+
+Route::post('weather/', 'WeatherController@store');
